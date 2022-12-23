@@ -3,7 +3,7 @@ import os
 import joblib
 
 import logging
-logging.basicConfig(level = logging.DEBUG)
+logging.basicConfig(level = logging.DEBUG, filename='main_logs.log', filemode = 'w')
 
 import pandas as pd
 import numpy as np
@@ -25,17 +25,17 @@ if __name__ == "__main__":
     logging.info("Reading data")
     df = pd.read_csv(DATA_PATH)
 
-    train_test_split_args = {'test_size': 0.2, 'shuffle': True, 'random_state': RANDOM_STATE}
-    train, test = data_processor.split_data(df, **train_test_split_args)
-
     num_cols = ['carat', 'depth', 'table', 'price', 'x', 'y', 'z']
     binary_cols = []
     categorical_cols = ['color', 'clarity']
     target_col = ['cut']
 
-
-    logging.info("Initiaize the data processor and set to training mode")
     data_processor = DataProcessor(num_cols, binary_cols, categorical_cols, target_col, mode = 'train')
+    logging.info("Initiaize the data processor and set to training mode")
+
+
+    train_test_split_args = {'test_size': 0.2, 'shuffle': True, 'random_state': RANDOM_STATE}
+    train, test = data_processor.split_data(df, **train_test_split_args)
 
     logging.info("processing training data and fitting encoders ..")
     X_train, y_train = data_processor.process_data(train)

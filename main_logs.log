@@ -1,0 +1,22 @@
+INFO:numexpr.utils:Note: NumExpr detected 12 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+INFO:numexpr.utils:NumExpr defaulting to 8 threads.
+INFO:root:Reading data
+INFO:root:Initiaize the data processor and set to training mode
+INFO:root:train data rows: 43152, test data rows: 10788
+INFO:root:processing training data and fitting encoders ..
+INFO:root:Processing test data by setting to test mode ..
+INFO:root:Training model ..
+INFO:root:Model performance on test data:
+
+INFO:root:              precision    recall  f1-score   support
+
+        Fair       0.91      0.87      0.89       307
+        Good       0.83      0.64      0.72       945
+       Ideal       0.81      0.93      0.86      4329
+     Premium       0.66      0.84      0.74      2794
+   Very Good       0.72      0.36      0.48      2413
+
+    accuracy                           0.75     10788
+   macro avg       0.79      0.73      0.74     10788
+weighted avg       0.76      0.75      0.73     10788
+

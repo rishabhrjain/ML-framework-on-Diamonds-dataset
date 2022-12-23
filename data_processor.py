@@ -77,7 +77,6 @@ class DataProcessor():
             # ordinally encode the categorical cols
             for col in self.cat_cols:
                 enc = OrdinalEncoder()
-                enc.set_params(encoded_missing_value=-1)
                 enc.fit(np.array(df[col]).reshape(-1, 1))
                 
                 self.encoders[col] = enc
