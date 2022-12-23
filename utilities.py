@@ -1,5 +1,7 @@
 import os
 import joblib
+import logging
+logging.basicConfig(level = logging.DEBUG)
 
 
 def save_pkl(obj, dir, filename):
@@ -13,7 +15,7 @@ def load_pkl( dir,  filename):
     
     
     if not os.path.isfile(filepath):
-        print(f'File not found - {filepath}')
+        logging.error(f'File not found - {filepath}')
         raise FileNotFoundError
         
     obj = joblib.load(filepath)

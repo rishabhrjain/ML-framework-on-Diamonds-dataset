@@ -1,7 +1,9 @@
 # ML-framework-on-Diamonds-dataset
 This is an example repository to show how a basic ML framework looks like following OOP. The aim is to help anyone who is familiar with training ML models to transition from jupyter notebooks to OOP. 
 
-Here are the steps:  
+Note that Jupyter notebooks are still better for Exploratory data anlysis and just building a first pass model. But this framework helps to create modular code, easy to run code that can helpful to any project with minimal changes. 
+
+Here are the steps in the current framework:  
 
 1. split the given dataframe into train and test. This should be the first step to make sure nothing from test data is seen during training.  
 
@@ -18,7 +20,7 @@ Here are the steps:
 
 Just rain main.py to start the entire process.
 
-In general, the training and test predictions (inference) happen seperately. so can have a training module and an inference module going forward. 
+In general, the training and test predictions (inference) happen seperately. so can have a seperate training and an inference module going forward. 
 Hope this helps! Please reach out in case of any questions.
 
    

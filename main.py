@@ -2,6 +2,9 @@
 import os
 import joblib
 
+import logging
+logging.basicConfig(level = logging.DEBUG)
+
 import pandas as pd
 import numpy as np
 
@@ -19,28 +22,29 @@ RANDOM_STATE = 40
 
 if __name__ == "__main__":
 
-    print("Reading data")
+    logging.info("Reading data")
     df = pd.read_csv(DATA_PATH)
-
-    num_cols = ['carat', 'depth', 'table', 'price', 'x', 'y', 'z']
-    binary_cols = []
-    categorical_cols = ['color', 'clarity']
-
-    target_col = ['cut']
-    print("processing data")
-    data_processor = DataProcessor(num_cols, binary_cols, categorical_cols, target_col, mode = 'train')
 
     train_test_split_args = {'test_size': 0.2, 'shuffle': True, 'random_state': RANDOM_STATE}
     train, test = data_processor.split_data(df, **train_test_split_args)
 
-    print("processing training data and fitting encoders ..")
+    num_cols = ['carat', 'depth', 'table', 'price', 'x', 'y', 'z']
+    binary_cols = []
+    categorical_cols = ['color', 'clarity']
+    target_col = ['cut']
+
+
+    logging.info("Initiaize the data processor and set to training mode")
+    data_processor = DataProcessor(num_cols, binary_cols, categorical_cols, target_col, mode = 'train')
+
+    logging.info("processing training data and fitting encoders ..")
     X_train, y_train = data_processor.process_data(train)
 
-    print("Processing test data ..")
+    logging.info("Processing test data by setting to test mode ..")
     data_processor.mode = 'test'
     X_test, y_test = data_processor.process_data(test)
 
-    print("Training model ..")
+    logging.info("Training model ..")
     clf = Model()
     clf.model = RandomForestClassifier()
 
@@ -48,13 +52,13 @@ if __name__ == "__main__":
 
     gc_rf = clf.grid_search_fit(X_train, y_train.values.ravel(), param_grid)
 
-    print("Model performance on test data:\n")
+    logging.info("Model performance on test data:\n")
     y_pred = gc_rf.predict(X_test)
 
     X_test['target_pred'] = y_pred
     X_test.to_csv(DATA_DIR + '/predictions.csv', index=False)
 
-    print(classification_report(y_test, y_pred))
+    logging.info(classification_report(y_test, y_pred))
 
 
 
